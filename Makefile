@@ -2,13 +2,13 @@ CC = gcc
 CFLAGS = -Wall
 
 default: all
-all: pipe_mux pipe_demux
+all: netfit-mux netfit-demux
 
-pipe_mux:
-	$(CC) $(CFLAGS) src/pipe_mux.c -o bin/pipe_mux
-pipe_demux:
-	$(CC) $(CFLAGS) src/pipe_demux.c -o bin/pipe_demux
+netfit-mux:
+	$(CC) $(CFLAGS) src/netfit-mux.c -o bin/netfit-mux
+netfit-demux:
+	$(CC) $(CFLAGS) src/netfit-demux.c -o bin/netfit-demux
 
 clean:
-	-rm -f bin/pipe_mux
-	-rm -f bin/pipe_demux
+	-rm -f bin/netfit-mux
+	-rm -f bin/netfit-demux
