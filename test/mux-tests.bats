@@ -29,6 +29,19 @@ loremipsum=${BATS_TEST_DIRNAME}/data/loremipsum
     [ "$result_err" == "$(cat $loremipsum)" ]
 }
 
+@test "mux: binary pipe" {
+    err_fifo=$(mktemp /tmp/err.fifo.XXXXXXXXX --dry-run)
+    mkfifo $err_fifo
+    err_out=$(mktemp /tmp/err.out.XXXXXXXXX)
+
+    result=$(cat $loremipsum | tee $err_fifo | gzip | ${BD}/netfit-mux $err_fifo | ${BD}/netfit-demux 2>$err_out | gunzip)
+
+    result_err=$(cat $err_out)
+    rm $err_fifo $err_out
+    [ "$result" == "$(cat $loremipsum)" ]
+    [ "$result_err" == "$(cat $loremipsum)" ]
+}
+
 @test "mux: choked pipe" {
     bytes=1000
     choke_time=0.01
