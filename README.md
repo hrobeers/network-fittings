@@ -20,6 +20,9 @@ However, once your pipeline gets distributed over the network, things start to g
 This toolbox aims at providing the required 'fittings' for transparently distributing your pipelines over the network.
 
 
+Tools
+-----
+
 ### Stream multiplexing (netfit-mux & netfit-demux)
 
 `netfit-mux` and `netfit-demux` allow to multiplex multiple binary streams (currently only 2) over a single stream.
