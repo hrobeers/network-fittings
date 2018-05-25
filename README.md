@@ -10,6 +10,11 @@ Quickstart
 make check
 ```
 
+#### Dependencies
+- C compiler (gcc)
+- Bash
+- [Bats: Bash Automated Testing System](https://github.com/sstephenson/bats) (for tests)
+
 
 Rationale
 ---------
