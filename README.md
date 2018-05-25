@@ -19,7 +19,7 @@ make check
 Rationale
 ---------
 
-All decent Unix tools can be assembled together like Lego bricks, using the well known stdin, stdout and stderr stream.
+All decent Unix tools can be assembled together like Lego bricks using the well known stdin, stdout and stderr stream.
 However, once your pipeline gets distributed over the network, things start to get complicated as duplex sockets have no place for stderr and passing commandline arguments can become cumbersome.
 
 This toolbox aims at providing the required 'fittings' for transparently distributing your pipelines over the network.
