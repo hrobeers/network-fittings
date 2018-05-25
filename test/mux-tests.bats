@@ -22,8 +22,25 @@ loremipsum=${BATS_TEST_DIRNAME}/data/loremipsum
     err_out=$(mktemp /tmp/err.out.XXXXXXXXX)
 
     result=$(cat $loremipsum | tee $err_fifo | base64 | ${BD}/netfit-mux $err_fifo | ${BD}/netfit-demux 2>$err_out)
+
     result_err=$(cat $err_out)
     rm $err_fifo $err_out
     [ "$result" == "$(cat $loremipsum | base64)" ]
     [ "$result_err" == "$(cat $loremipsum)" ]
+}
+
+@test "mux: choked pipe" {
+    bytes=1000
+    choke_time=0.01
+
+    err_fifo=$(mktemp /tmp/err.fifo.XXXXXXXXX --dry-run)
+    mkfifo $err_fifo
+    err_out=$(mktemp /tmp/err.out.XXXXXXXXX)
+
+    result=$(cat $loremipsum | head -c $bytes | tee $err_fifo | base64 | ${BD}/netfit-mux $err_fifo | base64 | while read -r line; do echo "$line"; sleep $choke_time; done | base64 -d | ${BD}/netfit-demux 2>$err_out)
+
+    result_err=$(cat $err_out)
+    rm $err_fifo $err_out
+    [ "$result" == "$(cat $loremipsum | head -c $bytes | base64)" ]
+    [ "$result_err" == "$(cat $loremipsum | head -c $bytes)" ]
 }
