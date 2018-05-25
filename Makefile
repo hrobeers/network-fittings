@@ -4,6 +4,10 @@ CFLAGS = -Wall
 default: all
 all: netfit-mux netfit-demux
 
+test: check
+check: all
+	./test/all.sh
+
 netfit-mux:
 	$(CC) $(CFLAGS) src/netfit-mux.c -o bin/netfit-mux
 netfit-demux:

@@ -4,6 +4,13 @@ network-fittings
 A toolbox to connect your UNIX plumbing over the network.
 
 
+Quickstart
+----------
+```bash
+make check
+```
+
+
 Rationale
 ---------
 
