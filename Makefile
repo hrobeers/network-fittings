@@ -2,16 +2,16 @@ CC = gcc
 CFLAGS= -Wall -O3
 
 default: all
-all: netfit-mux netfit-demux
+all: mux demux
 
 test: check
 check: all
 	./test/all.sh
 
-netfit-mux:
-	$(CC) $(CFLAGS) src/netfit-mux.c -o bin/netfit-mux
-netfit-demux:
-	$(CC) $(CFLAGS) src/netfit-demux.c -o bin/netfit-demux
+mux:
+	$(CC) $(CFLAGS) src/mux.c -o bin/netfit-mux
+demux:
+	$(CC) $(CFLAGS) src/demux.c -o bin/netfit-demux
 
 clean:
 	-rm -f bin/netfit-mux
