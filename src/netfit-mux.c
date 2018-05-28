@@ -16,6 +16,16 @@ struct channel {
   int closed;
 };
 
+void write_blocking(unsigned char* buffer, unsigned char size) {
+  size_t pos = 0;
+  while (pos < size) {
+    size_t cnt = write(STDOUT_FILENO, &buffer[pos], size-pos);
+    if (cnt < 0)
+      exit(cnt);
+    pos += cnt;
+  }
+}
+
 int main(int argc, char* argv[])
 {
   if (argc != 2)
@@ -51,9 +61,9 @@ int main(int argc, char* argv[])
         else {
           /* TODO handle incomplete writes using select */
           len = read_cnt;
-          write(STDOUT_FILENO, &(channels[i].prfx), 1);
-          write(STDOUT_FILENO, &len, 1);
-          write(STDOUT_FILENO, buf, read_cnt);
+          write_blocking(&(channels[i].prfx), 1);
+          write_blocking(&len, 1);
+          write_blocking(buf, read_cnt);
         }
       }
     }
