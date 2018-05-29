@@ -1,2 +1,3 @@
-bin/
+libexec/netfit/mux
+libexec/netfit/demux
 *~
