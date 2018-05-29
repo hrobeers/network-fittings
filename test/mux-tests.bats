@@ -2,8 +2,7 @@
 
 BD=${BATS_TEST_DIRNAME}/../bin
 loremipsum=${BATS_TEST_DIRNAME}/data/loremipsum
-lorem_expected=/tmp/lorem.expected
-trap "rm $lorem_expected" EXIT
+lorem_expected=${BATS_TEST_DIRNAME}/data/lorem.expected
 
 @test "mux: stdout pipe" {
     # Pipe loremipsum over std channel

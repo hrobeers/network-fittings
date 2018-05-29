@@ -1,3 +1,4 @@
 libexec/netfit/mux
 libexec/netfit/demux
 *~
+*.expected
