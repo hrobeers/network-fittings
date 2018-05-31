@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ROOT=$(dirname $( dirname "${BASH_SOURCE[0]}" ))
+exec "$ROOT"/libexec/netfit/cmd-server.sh "$@"
