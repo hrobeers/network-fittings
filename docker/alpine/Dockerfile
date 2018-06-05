@@ -1,3 +1,14 @@
+# Build a compilation container in a first stage to minimize size
+FROM alpine as builder
+
+# Install build dependencies in separate layer for caching
+RUN apk --update add socat gcc make libc-dev bats git pv \
+    && rm -rf /var/cache/apk/*
+
+RUN git clone https://github.com/hrobeers/network-fittings.git && \
+    cd network-fittings && make check && \
+    ./install.sh /usr
+
 FROM alpine
 MAINTAINER hrobeers <hrobeers@users.noreply.github.com>
 
