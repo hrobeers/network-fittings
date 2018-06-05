@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 
 BD=${BATS_TEST_DIRNAME}/../bin
+LD=${BATS_TEST_DIRNAME}/../libexec/netfit
 loremipsum=${BATS_TEST_DIRNAME}/data/loremipsum
 lorem_expected=${BATS_TEST_DIRNAME}/data/lorem.expected
 
@@ -17,8 +18,7 @@ lorem_expected=${BATS_TEST_DIRNAME}/data/lorem.expected
 
 @test "mux: stderr pipe" {
     # Create err fifo
-    err_fifo=$(mktemp /tmp/err.fifo.XXXXXXXXX --dry-run)
-    mkfifo $err_fifo
+    err_fifo=$(${LD}/mktemp-fifo.sh /tmp/err.fifo.XXXXXXXXX)
 
     # Pipe loremipsum over err channel
     result=$(cat $loremipsum > $err_fifo               `# write loremipsum to err_fifo` \
@@ -34,8 +34,7 @@ lorem_expected=${BATS_TEST_DIRNAME}/data/lorem.expected
 
 @test "mux: mixed pipe" {
     # Create err fifo and out file
-    err_fifo=$(mktemp /tmp/err.fifo.XXXXXXXXX --dry-run)
-    mkfifo $err_fifo
+    err_fifo=$(${LD}/mktemp-fifo.sh /tmp/err.fifo.XXXXXXXXX)
     err_out=$(mktemp /tmp/err.out.XXXXXXXXX)
 
     # Pipe loremipsum over err and std channel (base64 encoded over std channel)
@@ -58,8 +57,7 @@ lorem_expected=${BATS_TEST_DIRNAME}/data/lorem.expected
 
 @test "mux: binary pipe" {
     # Create err fifo and out file
-    err_fifo=$(mktemp /tmp/err.fifo.XXXXXXXXX --dry-run)
-    mkfifo $err_fifo
+    err_fifo=$(${LD}/mktemp-fifo.sh /tmp/err.fifo.XXXXXXXXX)
     err_out=$(mktemp /tmp/err.out.XXXXXXXXX)
 
     # Pipe loremipsum over err and std channel (gzip compressed over std channel)
