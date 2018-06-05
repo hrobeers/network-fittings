@@ -1,5 +1,5 @@
 # Build a compilation container in a first stage to minimize size
-FROM debian:unstable-slim as builder
+FROM debian:sid-slim as builder
 
 # Install build dependencies in separate layer for caching
 RUN  set -x \
@@ -15,7 +15,7 @@ RUN set -x \
     && rm -rf network-fittings
 
 # Build the runtime container in second stage to minimize size
-FROM debian:unstable-slim
+FROM debian:sid-slim
 MAINTAINER hrobeers <hrobeers@users.noreply.github.com>
 
 # Install runtime dependencies
