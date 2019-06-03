@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
 
-fifo=$(mktemp "$@" --dry-run)
+fifo=$(mktemp -t "$@" --dry-run)
 mkfifo $fifo
 echo $fifo

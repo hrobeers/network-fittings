@@ -20,7 +20,7 @@ set -u
 
 DIR=$( dirname "${BASH_SOURCE[0]}" )
 
-err_fifo=$("$DIR"/mktemp-fifo.sh /tmp/netfit.fifo.XXXXXXXXX)
+err_fifo=$("$DIR"/mktemp-fifo.sh netfit.fifo.XXXXXXXXX)
 trap "rm $err_fifo" EXIT
 
 "$DIR"/passargs.sh "$@" 2> $err_fifo | "$DIR"/mux $err_fifo

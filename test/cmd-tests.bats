@@ -4,7 +4,8 @@ BD=${BATS_TEST_DIRNAME}/../bin
 loremipsum=${BATS_TEST_DIRNAME}/data/loremipsum
 
 # pid file
-pids="/tmp/netfit-test.pids"
+TMPD=$(dirname $(mktemp -u))
+pids="${TMPD}/netfit-test.pids"
 [ -f "$pids" ] || touch $pids
 
 cleanup() {
